@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const Role = require("../models/role.model");
 
 const checkDuplicateUserNameOrEmail = async (req, res, next) => {
   const user = await User.findOne({ username: req.body.username });
@@ -11,19 +12,23 @@ const checkDuplicateUserNameOrEmail = async (req, res, next) => {
   next();
 };
 
-const ROLES = ["user", "admin"];
+const checkRolesExisted = async (req, res, next) => {
+  const rol = await Role.find({ name: req.body.roles });
 
-const checkRolesExisted = (req, res, next) => {
-  if (req.body.roles) {
+  if (rol.length == req.body.roles.length) {
+    next();
+  } else {
+    let cont = 0,
+      text = "";
     for (let i = 0; i < req.body.roles.length; i++) {
-      if (!ROLES.includes(req.body.roles[i])) {
-        return res
-          .status(400)
-          .json({ message: `Role ${req.body.roles[i]} does not exist` });
+      for (let j = 0; j < rol.length; j++) {
+        if (req.body.roles[i] == rol[j].name) cont++;
       }
+      text += cont == 0 ? req.body.roles[i] + ", " : "";
+      cont = 0;
     }
+    return res.status(400).json({ message: `Role ${text} does not exist` });
   }
-  next();
 };
 
 module.exports = {

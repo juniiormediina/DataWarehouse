@@ -12,7 +12,7 @@ const verifyToken = async (req, res, next) => {
     const decoded = jwt.verify(token, config.SECRET);
     req.userId = decoded.id;
     const user = await User.findById(req.userId, { password: 0 });
-    if (!user) return res.status(404).json({ message: "No user found" });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
     next();
   } catch (error) {
