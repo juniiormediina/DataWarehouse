@@ -5,7 +5,7 @@ const regionModel = sequelize.define(
   "Region",
   {
     name: {
-      type: String,
+      type: DataTypes.STRING(50),
     },
   },
   {

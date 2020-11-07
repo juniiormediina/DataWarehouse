@@ -5,28 +5,28 @@ const companiesModel = sequelize.define(
   "Companies",
   {
     name: {
-      type: String,
-      required: true,
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
     country: {
-      type: String,
-      required: true,
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
     city: {
-      type: String,
-      required: true,
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
     address: {
-      type: String,
-      required: true,
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
     email: {
-      type: String,
-      required: true,
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
     phone: {
-      type: Number,
-      required: true,
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
   },
   {

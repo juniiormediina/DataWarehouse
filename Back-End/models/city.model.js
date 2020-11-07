@@ -5,7 +5,7 @@ const cityModel = sequelize.define(
   "City",
   {
     name: {
-      type: String,
+      type: DataTypes.STRING(15),
     },
   },
   {
