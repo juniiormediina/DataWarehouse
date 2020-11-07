@@ -1,18 +1,25 @@
 const express = require("express");
-const morgan = require("morgan");
 const helmet = require("helmet");
+const morgan = require("morgan");
 
 /* Initializations */
 const app = express();
-require("./libs/initialSetup");
 
-/* Middelwares */
-app.use(helmet());
+/* Middlewares */
 app.use(morgan("dev"));
+app.use(helmet());
+app.use(function (__, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5501");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "PUT", "POST", "GET", "DELETE");
+  next();
+});
 app.use(express.json());
 
 /* Routes */
-
-app.use("/users", require("./routes/user.routes"));
+app.use("/api/users", require("./routes/user.routes"));
 
 module.exports = app;

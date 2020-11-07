@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap");
+
+$principal_font: "Poppins", sans-serif;
+$secondary_font: "Syne Mono", monospace;
+$pricipal_color: #38d39f;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: $principal_font;
+}
+
+@import "login";
+@import "main";
+
+/* 'Syne Mono', monospace; */
+
+/* "Poppins", sans-serif; */

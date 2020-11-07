@@ -1,40 +1,40 @@
-const { Schema, model } = require("mongoose");
-const bcrypt = require("bcryptjs");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../models/index");
 
-const userSchema = new Schema(
+const userModel = sequelize.define(
+  "Users",
   {
-    username: {
-      type: String,
-      unique: true,
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER(10),
+    },
+    firstName: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
     email: {
-      type: String,
-      unique: true,
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    roles: {
+      allowNull: false,
+      type: DataTypes.STRING(10),
     },
     password: {
-      type: String,
-      required: true,
+      type: DataTypes.STRING(20),
+      allowNull: false,
     },
-    roles: [
-      {
-        ref: "Role",
-        type: Schema.Types.ObjectId,
-      },
-    ],
   },
   {
     timestamps: true,
-    versionKey: false,
+    tableName: "User",
   }
 );
 
-userSchema.statics.encryptPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password, salt);
-};
-
-userSchema.statics.comparePassword = async (password, receivedPassword) => {
-  return await bcrypt.compare(password, receivedPassword);
-};
-
-module.exports = model("User", userSchema);
+module.exports = userModel;
