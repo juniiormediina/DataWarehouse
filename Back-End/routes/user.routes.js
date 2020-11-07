@@ -7,6 +7,7 @@ const {
   find,
   findById,
   updateById,
+  deleteById,
 } = require("../controller/user.controller");
 
 router.post("/signup", (req, res) => {
@@ -21,16 +22,16 @@ router.get("/find", (req, res) => {
   find(req, res);
 });
 
-router.get("/find/:id", (req, res) => {
+router.get("/findById/:id", (req, res) => {
   findById(req, res);
 });
 
-router.put("/updateById/id", (req, res) => {
+router.put("/updateById/:id", (req, res) => {
   updateById(req, res);
 });
 
-/* router.delete("/delete", (req, res) => {
-  res.send("funcionando");
-}); */
+router.delete("/deleteById/:id", (req, res) => {
+  deleteById(req, res);
+});
 
 module.exports = router;

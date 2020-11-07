@@ -93,4 +93,19 @@ const updateById = (req, res) => {
     });
 };
 
-module.exports = { signUp, signIn, find, findById, updateById };
+const deleteById = (req, res) => {
+  let id = req.params.id;
+  User.destroy({ where: { id: id } })
+    .then((user) => {
+      if (user === 1) res.status(200).json({ message: " User deleted." });
+      else res.status(400).json({ message: "User could not be deleted" });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message:
+          "I'm Sorry, the server has presented an error. Try again later",
+      });
+    });
+};
+
+module.exports = { signUp, signIn, find, findById, updateById, deleteById };

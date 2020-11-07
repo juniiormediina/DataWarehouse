@@ -36,39 +36,7 @@ const userModel = sequelize.define(
   {
     timestamps: true,
     tableName: "User",
-    /* hooks: {
-      beforeCreate: function (user, options) {
-        return new Promise((resolve, reject) => {
-          bcrypt.hash(user.password, 8, (err, data) => {
-            if (err) reject(err);
-            user.password = data;
-            resolve();
-          });
-        });
-      },
-    }, */
   }
 );
-
-/* encryptPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password, salt);
-};
-
-comparePassword = async (password, receivedPassword) => {
-  return await bcrypt.compare(password, receivedPassword);
-}; */
-
-/* userModel.beforeCreate(encryptPassword);
-userModel.beforeCreate(comparePassword); */
-
-/* userModel.statics.encryptPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password, salt);
-};
-
-userModel.statics.comparePassword = async (password, receivedPassword) => {
-  return await bcrypt.compare(password, receivedPassword);
-}; */
 
 module.exports = userModel;
