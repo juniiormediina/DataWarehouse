@@ -1,6 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const cors = require("cors");
 
 /* Initializations */
 const app = express();
@@ -18,8 +19,14 @@ app.use(function (__, res, next) {
   next();
 });
 app.use(express.json());
+app.use(cors());
+app.options("*", cors());
 
 /* Routes */
 app.use("/api/users", require("./routes/user.routes"));
+app.use("/api/companies", require("./routes/companies.routes"));
+app.use("/api/country", require("./routes/Country.routes"));
+app.use("/api/city", require("./routes/City.routes"));
+app.use("/api/region", require("./routes/Region.routes"));
 
 module.exports = app;

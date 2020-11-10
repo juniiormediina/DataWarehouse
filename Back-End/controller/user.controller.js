@@ -31,7 +31,7 @@ const signUp = async (req, res) => {
   });
   console.log(token);
 
-  res.status(200).json({ token });
+  res.status(200).json(savedUser);
 };
 
 const signIn = (req, res) => {
@@ -44,7 +44,6 @@ const signIn = (req, res) => {
   if (!matchPassword)
     return res.status(401).json({ token: null, message: "Invalid password" });
 
-  console.log("AQUI ESTA LA RESPUESTA", matchPassword);
   //TODO:Verificar porque genera error (OJO ESTA FUNCIONANDO BIEN)
   const token = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET, {
     expiresIn: 86400, // 24 hours
@@ -56,7 +55,7 @@ const signIn = (req, res) => {
 const find = (req, res) => {
   User.findAll()
     .then((users) => {
-      res.status(200).json({ users });
+      res.status(200).json(users);
     })
     .catch((err) => {
       res.status(500).json({
@@ -69,7 +68,7 @@ const find = (req, res) => {
 const findById = (req, res) => {
   let id = req.params.id;
   User.findOne({ where: { id: id } }).then((user) => {
-    res.status(200).json({ user });
+    res.status(200).json(user);
   });
 };
 

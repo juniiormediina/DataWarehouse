@@ -30,7 +30,7 @@ const companiesModel = sequelize.define(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
     tableName: "Companies",
   }
 );

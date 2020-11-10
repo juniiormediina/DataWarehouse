@@ -31,5 +31,217 @@
             </ul>
         </nav>
     </header>
+<main>
+    <section class="firstSect">
+        <div class="container-top">
+            <h2>Contacts</h2>
+            <div class="container-int">
+                <div class="form-group">
+                    <input type="text" class="form-control">
+                </div>
+                <div>
+                    <button type="submit" class="btn" data-toggle="modal" data-target="#addUser">Add User</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Nuevo Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputUserName">Nombres</label>
+                                <input type="text" class="form-control" id="inputfirstName" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputUserLastName">Apellidos</label>
+                                <input type="text" class="form-control" id="inputLastName" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail">Email</label>
+                                <input type="email" class="form-control" id="inputEmail" />
+                                <p class="emailExist" id="emailExist"></p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputProfile">Perfil</label>
+                                <select id="inputProfile" class="form-control">
+                                    <option selected></option>
+                                    <option>Usuario</option>
+                                    <option>Administrador</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword">Contraseña</label>
+                                <input type="password" class="form-control" id="inputPassword" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPasswordConf">Repetir Contraseña</label>
+                                <input type="password" class="form-control" id="PasswordConfirm" />
+                                <p id="passwordMessage" class="passwordMessage"></p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="validationFormAdd()" id="saveUser">
+                            Guardar Usuario
+                        </button>
+                        <p id="notification" class="lackFields"></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Limpiar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Table section -->
+    <section class="usersList" id="usersList">
+        <div class="usersTitles">
+            <input type="checkbox" class="select" />
+            <div class="iconsContainer1">
+                <h3 class="userName">First name</h3>
+                <i class="fas fa-sort-up" onclick="sortByNameA()"></i>
+                <i class="fas fa-sort-down" onclick="sortByNameZ()"></i>
+            </div>
+            <div class="iconsContainer2">
+                <h3 class="userLastName">Last name</h3>
+                <i class="fas fa-sort-up" onclick="sortByLastNameA()"></i>
+                <i class="fas fa-sort-down" onclick="sortByLastNameZ()"></i>
+            </div>
+            <div class="iconsContainer3">
+                <h3 class="userEmail">E-mail</h3>
+                <i class="fas fa-sort-up" onclick="sortByEmailA()"></i>
+                <i class="fas fa-sort-down" onclick="sortByEmailZ()"></i>
+            </div>
+            <div class="iconsContainer4">
+                <h3 class="userProfile">Profile</h3>
+                <i class="fas fa-sort-up" onclick="sortByProfileA()"></i>
+                <i class="fas fa-sort-down" onclick="sortByProfileZ()"></i>
+            </div>
+        </div>
+
+        <!-- Information Container -->
+        <div id="usersContainer">
+
+
+
+            
+
+
+
+        </div>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteConfirm" data-toggle="modal" tabindex="-1"
+            aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteConfirmLabel">
+                            Are you sure you want to delete the user?
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="confirmDelete" data-dismiss="modal">
+                            Yes
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                            No
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="user">
+          <input type="checkbox" class="selectCont" />
+          <h3 class="name">Juan Alberto</h3>
+          <h3 class="lastName">Aristizabal Goez</h3>
+          <h3 class="email">juan@correo.com</h3>
+          <h3 class="profile">Administrador</h3>
+          <i class="fas fa-edit"></i>
+          <i
+            class="far fa-trash-alt"
+            data-target="#deleteConfirm"
+            data-toggle="modal"
+          ></i>
+          <div
+            class="modal fade"
+            id="deleteConfirm"
+            data-toggle="modal"
+            tabindex="-1"
+            aria-labelledby="deleteConfirmLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteConfirmLabel">
+                    ¿Está seguro que desea eliminar el usuario?
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                    onclick="deleteUser(this)"
+                  >
+                    SI
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                  >
+                    NO
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="user">
+          <input type="checkbox" class="selectCont" />
+          <img src="" alt="" class="photo" />
+          <h3 class="name">Maria Valeria</h3>
+          <h3 class="lastName">Alvarez Medina</h3>
+          <h3 class="email">Valeria@correo.com</h3>
+          <h3 class="profile">Usuario</h3>
+          <i class="fas fa-edit"></i>
+          <i class="far fa-trash-alt"></i>
+        </div> -->
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+<script src="js/users.js"></script>
+
 </body>
 </html>

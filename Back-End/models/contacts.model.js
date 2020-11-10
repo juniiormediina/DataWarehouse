@@ -46,7 +46,7 @@ const contactsModel = sequelize.define(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
     tableName: "Contacts",
   }
 );

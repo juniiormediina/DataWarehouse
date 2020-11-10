@@ -12,9 +12,7 @@ $pricipal_color: #38d39f;
   font-family: $principal_font;
 }
 
-@import "login";
-@import "main";
-
-/* 'Syne Mono', monospace; */
-
-/* "Poppins", sans-serif; */
+@import "sass/index";
+@import "sass/header";
+@import "sass/users";
+@import "sass/contact";
