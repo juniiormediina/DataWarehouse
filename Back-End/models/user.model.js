@@ -1,8 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../models/index");
 
-/* const bcrypt = require("bcryptjs"); */
-
 const userModel = sequelize.define(
   "Users",
   {
@@ -24,7 +22,7 @@ const userModel = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    roles: {
+    profile: {
       allowNull: false,
       type: DataTypes.STRING(20),
     },
@@ -35,7 +33,7 @@ const userModel = sequelize.define(
   },
   {
     timestamps: false,
-    tableName: "User",
+    tableName: "Users",
   }
 );
 

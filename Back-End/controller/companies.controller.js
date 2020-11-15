@@ -21,8 +21,7 @@ const findCompanies = (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };
@@ -40,13 +39,12 @@ const updateCompaniesById = (req, res) => {
   Companies.update(data, { where: { id: id } })
     .then((company) => {
       if (company[0] === 1)
-        res.status(200).json({ message: "Company updated" });
+        res.status(200).json({ message: "Company has been updated" });
       else res.status(404).json({ message: "Company could not be updated" });
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };
@@ -55,13 +53,13 @@ const deleteCompaniesById = (req, res) => {
   let id = req.params.id;
   Companies.destroy({ where: { id: id } })
     .then((company) => {
-      if (company === 1) res.status(200).json({ message: " User deleted." });
-      else res.status(400).json({ message: "User could not be deleted" });
+      if (company === 1)
+        res.status(200).json({ message: "Company has been deleted." });
+      else res.status(400).json({ message: "Company could not be deleted" });
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };

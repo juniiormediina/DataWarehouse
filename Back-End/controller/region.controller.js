@@ -16,8 +16,7 @@ const find = (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };
@@ -37,13 +36,12 @@ const updateRegionById = (req, res) => {
   Region.update(data, { where: { id: id } })
     .then((region) => {
       if (region[0] === 1)
-        res.status(200).json({ message: " Region Updated." });
+        res.status(200).json({ message: " Region has been updated." });
       else res.status(400).json({ message: "Region could not be updated" });
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };
@@ -52,13 +50,13 @@ const deleteRegionById = (req, res) => {
   let id = req.params.id;
   Region.destroy({ where: { id: id } })
     .then((region) => {
-      if (region === 1) res.status(200).json({ message: " region deleted." });
-      else res.status(400).json({ message: "region could not be deleted" });
+      if (region === 1)
+        res.status(200).json({ message: "Region has been deleted." });
+      else res.status(400).json({ message: "Region could not be deleted" });
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };

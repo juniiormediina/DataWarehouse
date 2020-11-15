@@ -16,8 +16,7 @@ const find = (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };
@@ -37,13 +36,12 @@ const updateCountryById = (req, res) => {
   Country.update(data, { where: { id: id } })
     .then((country) => {
       if (country[0] === 1)
-        res.status(200).json({ message: " Country Updated." });
+        res.status(200).json({ message: " Country has been updated." });
       else res.status(400).json({ message: "Country could not be updated" });
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };
@@ -52,13 +50,13 @@ const deleteCountryById = (req, res) => {
   let id = req.params.id;
   Country.destroy({ where: { id: id } })
     .then((country) => {
-      if (country === 1) res.status(200).json({ message: " country deleted." });
-      else res.status(400).json({ message: "country could not be deleted" });
+      if (country === 1)
+        res.status(200).json({ message: "Country has been deleted." });
+      else res.status(400).json({ message: "Country could not be deleted" });
     })
     .catch((err) => {
       res.status(500).json({
-        message:
-          "I'm Sorry, the server has presented an error. Try again later",
+        message: "Sorry, the server has presented an error. Try again later",
       });
     });
 };

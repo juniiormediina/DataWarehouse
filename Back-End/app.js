@@ -28,5 +28,6 @@ app.use("/api/companies", require("./routes/companies.routes"));
 app.use("/api/country", require("./routes/Country.routes"));
 app.use("/api/city", require("./routes/City.routes"));
 app.use("/api/region", require("./routes/Region.routes"));
+app.use("/api/contact", require("./routes/contact.routes"));
 
 module.exports = app;

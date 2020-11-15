@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const authorization = require("../middlewares/authorization.middleware");
+
 const {
   signUp,
   signIn,
@@ -30,7 +32,7 @@ router.put("/updateById/:id", (req, res) => {
   updateById(req, res);
 });
 
-router.delete("/deleteById/:id", (req, res) => {
+router.delete("/deleteById/:id", [authorization], (req, res) => {
   deleteById(req, res);
 });
 
