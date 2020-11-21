@@ -8,6 +8,7 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="stylesheet" href="dist/themes/default/style.min.css" />
 </head>
 <body>
     <header>
@@ -17,7 +18,7 @@
         <nav class="nav">
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" href="./index.html">Contact</a>
+                    <a class="nav-link active" href="./contact.html">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./companies.html">Companies</a>
@@ -31,5 +32,25 @@
             </ul>
         </nav>
     </header>
+    <main>
+        <li data-jstree='{"opened":true,"selected":true}'>Root
+            <ul>
+                <li data-jstree='{"disabled":true}'>Child</li>
+                <li data-jstree='{"icon":"//jstree.com/tree.png"}'>
+                    Child</li>
+                <li data-jstree='{"icon":"glyphicon glyphicon-leaf"}'>
+                    Child</li>
+            </ul>
+        </li>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+        $('button').on('click', function () {
+                $('#jstree').jstree(true).select_node('child_node_1');
+                $('#jstree').jstree('select_node', 'child_node_1');
+                $.jstree.reference('#jstree').select_node('child_node_1');
+            });
+    </script>
 </body>
 </html>

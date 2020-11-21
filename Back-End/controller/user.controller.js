@@ -3,8 +3,8 @@ const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
-const signUp = async (req, res) => {
-  const { firstName, lastName, email, profile, password } = req.body;
+const signUp = async (data) => {
+  /* const { firstName, lastName, email, profile, password } = req.body;
   const newUser = new User({
     firstName,
     lastName,
@@ -15,14 +15,54 @@ const signUp = async (req, res) => {
 
   const savedUser = await newUser.save();
 
-  res.status(200).json(savedUser);
+  res.status(200).json(savedUser); */
+
+  return new Promise(async (res, rejc) => {
+    if (
+      !data.firstName ||
+      !data.lastName ||
+      !data.email ||
+      !data.password ||
+      !data.profile
+    ) {
+      rejc({ status: 406, message: "Por favor llene todos los campos" });
+    } else {
+      bcrypt.hash(data.password, 10, (err, hash) => {
+        if (err) {
+          rejc({
+            status: 500,
+            message:
+              "Tenemos problemas en el servidor, por favor intente mas tarde",
+          });
+        } else {
+          data.password = hash;
+          User.create(data)
+            .then((user) => {
+              res(user);
+            })
+            .catch((err) => {
+              rejc({
+                status: 500,
+                message:
+                  "Tenemos problemas en el servidor, por favor intente mas tarde",
+              });
+            });
+        }
+      });
+    }
+  });
 };
 
-const signIn = (req, res) => {
-  const userFound = User.findOne({ where: { email: req.body.email } });
+const signIn = (email, password) => {
+  /* const userFound = User.findOne({ where: { email: req.body.email } });
   if (!userFound) return res.status(400).json({ message: "User not found" });
-
-  const matchPassword = comparePassword(req.body.password, userFound.password);
+  console.log(req.body.password);
+  const matchPassword = comparePassword(
+    req.body.password,
+    userFound.password
+  ).catch((err) =>
+    res.status(401).json({ message: "las contraseñas no coinciden" })
+  );
   if (!matchPassword)
     return res.status(401).json({ token: null, message: "Invalid password" });
 
@@ -30,10 +70,29 @@ const signIn = (req, res) => {
   const token = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET, {
     expiresIn: 86400, // 24 hours
   });
-  res.status(200).json({ token });
+  res.status(200).json({ token }); */
+  return new Promise(async (res, rejc) => {
+    if (!email || !password) {
+      rejc({ status: 406, message: "Faltan campos, por favor envielos" });
+    } else {
+      let user = await User.findOne({ where: { email: email } });
+      let comparePassword = await bcrypt.compare(password, user.password);
+
+      if (user && comparePassword) {
+        delete user.password;
+        res(
+          jwt.sign(user, process.env.JWT_SECRET, {
+            expiresIn: "1h",
+          })
+        );
+      } else {
+        rejc({ status: 401, message: `Usuario o contraseña no validos` });
+      }
+    }
+  });
 };
 
-const find = (req, res) => {
+const find = (__, res) => {
   User.findAll()
     .then((users) => {
       res.status(200).json(users);
@@ -85,13 +144,13 @@ const deleteById = (req, res) => {
     });
 };
 
-encryptPassword = async (password) => {
+/* encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
 
 comparePassword = async (password, receivedPassword) => {
   return await bcrypt.compare(password, receivedPassword);
-};
+}; */
 
 module.exports = { signUp, signIn, find, findById, updateById, deleteById };

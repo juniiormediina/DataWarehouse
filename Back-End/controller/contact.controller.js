@@ -4,7 +4,6 @@ const createContact = async (req, res) => {
   const {
     name,
     lastname,
-    role,
     email,
     company,
     region,
@@ -16,7 +15,6 @@ const createContact = async (req, res) => {
   const newContact = new Contact({
     name,
     lastname,
-    role,
     email,
     company,
     region,

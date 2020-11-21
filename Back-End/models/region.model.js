@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../models/index");
 
-const regionModel = sequelize.define(
+const Region = sequelize.define(
   "Region",
   {
     name: {
@@ -14,4 +14,4 @@ const regionModel = sequelize.define(
   }
 );
 
-module.exports = regionModel;
+module.exports = Region;

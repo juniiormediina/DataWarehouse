@@ -10,14 +10,14 @@ const findUser = () => {
     userList.json().then((users) => {
       console.log(users);
       users.forEach((element) => {
-        const { firstName, lastName, email, roles, id } = element;
+        const { firstName, lastName, email, profile, id } = element;
         let renderUser = `
             <div>
                 <input type="checkbox" class="selectCont" />
                 <h3 class="name">${firstName}</h3>
                 <h3 class="lastName">${lastName}</h3>
                 <h3 class="email">${email}</h3>
-                <h3 class="profile">${roles}</h3>
+                <h3 class="profile">${profile}</h3>
                 <i class="fas fa-edit"></i>
                 <i class="far fa-trash-alt"
                     onclick="deleteUser(${id})"
@@ -43,14 +43,14 @@ const createUser = (Userdata) => {
   }).then((user) => {
     user.json().then((users) => {
       console.log(users);
-      const { firstName, lastName, email, roles, id } = users;
+      const { firstName, lastName, email, profile, id } = users;
       let renderUser = `
             <div>
                 <input type="checkbox" class="selectCont" />
                 <h3 class="name">${firstName}</h3>
                 <h3 class="lastName">${lastName}</h3>
                 <h3 class="email">${email}</h3>
-                <h3 class="profile">${roles}</h3>
+                <h3 class="profile">${profile}</h3>
                 <i class="fas fa-edit"></i>
                 <i class="far fa-trash-alt"
                    onclick="deleteUser(${id})"
@@ -77,7 +77,7 @@ const validationFormAdd = () => {
     firstName: formAdd[0].value,
     lastName: formAdd[1].value,
     email: formAdd[2].value,
-    roles: formAdd[3].value,
+    profile: formAdd[3].value,
     password: formAdd[4].value,
   };
   console.log(data);

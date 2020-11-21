@@ -8,12 +8,12 @@ const sequelize = new Sequelize(
   {
     host: process.env.HOST,
     dialect: "mysql",
-    /* define: {
+    define: {
       freezeTableName: true,
     },
     query: {
       raw: true,
-    }, */
+    },
   }
 );
 

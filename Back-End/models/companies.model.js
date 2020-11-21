@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../models/index");
 
-const companiesModel = sequelize.define(
+const Companies = sequelize.define(
   "Companies",
   {
     name: {
@@ -35,4 +35,4 @@ const companiesModel = sequelize.define(
   }
 );
 
-module.exports = companiesModel;
+module.exports = Companies;

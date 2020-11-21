@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../models/index");
 
-const contactsModel = sequelize.define(
+const Contacts = sequelize.define(
   "Contacts",
   {
     name: {
@@ -51,4 +51,4 @@ const contactsModel = sequelize.define(
   }
 );
 
-module.exports = contactsModel;
+module.exports = Contacts;

@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../models/index");
+const Region = require("../models/Region.model");
 
-const countryModel = sequelize.define(
+const Country = sequelize.define(
   "Country",
   {
     name: {
@@ -14,4 +15,7 @@ const countryModel = sequelize.define(
   }
 );
 
-module.exports = countryModel;
+Region.hasMany(Country);
+Country.belongsTo(Region);
+
+module.exports = Country;

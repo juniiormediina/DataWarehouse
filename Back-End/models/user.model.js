@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../models/index");
 
-const userModel = sequelize.define(
+const User = sequelize.define(
   "Users",
   {
     id: {
@@ -37,4 +37,4 @@ const userModel = sequelize.define(
   }
 );
 
-module.exports = userModel;
+module.exports = User;

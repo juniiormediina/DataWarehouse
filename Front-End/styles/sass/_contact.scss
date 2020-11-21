@@ -1,4 +1,4 @@
-main {
+/* main {
   .container-top {
     padding: 60px;
     .container-int {
@@ -160,6 +160,20 @@ main {
           }
         }
       }
+    }
+  }
+}
+ */
+
+.contact {
+  main {
+    .title {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .contactTable {
+      padding-left: 20px;
+      padding-right: 20px;
     }
   }
 }
