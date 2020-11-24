@@ -16,9 +16,9 @@ const {
 
 router.post(
   "/signup",
-  CheckDuplicateEmail,
+  /* CheckDuplicateEmail,
   authentication,
-  authorization,
+  authorization, */
   (req, res) => {
     /* signUp(req, res); */
     signUp(req.body)
@@ -50,16 +50,25 @@ router.get(
   }
 );
 
-router.get("/findById/:id", authentication, authorization, (req, res) => {
-  findById(req, res);
-});
+router.get(
+  "/findById/:id",
+  /* authentication, authorization, */ (req, res) => {
+    findById(req, res);
+  }
+);
 
-router.put("/updateById/:id", authentication, authorization, (req, res) => {
-  updateById(req, res);
-});
+router.put(
+  "/updateById/:id",
+  /* authentication, authorization, */ (req, res) => {
+    updateById(req, res);
+  }
+);
 
-router.delete("/deleteById/:id", authentication, authorization, (req, res) => {
-  deleteById(req, res);
-});
+router.delete(
+  "/deleteById/:id",
+  /* authentication, authorization, */ (req, res) => {
+    deleteById(req, res);
+  }
+);
 
 module.exports = router;

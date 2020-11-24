@@ -1,0 +1,8 @@
+.region-city-content {
+  margin-top: 50px;
+  margin-left: 265px;
+  width: 100%;
+  .title {
+    @extend %title;
+  }
+}

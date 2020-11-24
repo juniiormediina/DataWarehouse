@@ -26,16 +26,25 @@ router.get(
   }
 );
 
-router.get("/findContactById/:id", authentication, (req, res) => {
-  findContactById(req, res);
-});
+router.get(
+  "/findContactById/:id",
+  /* authentication, */ (req, res) => {
+    findContactById(req, res);
+  }
+);
 
-router.put("/updateContactById/:id", authentication, (req, res) => {
-  updateContactById(req, res);
-});
+router.put(
+  "/updateContactById/:id",
+  /* authentication, */ (req, res) => {
+    updateContactById(req, res);
+  }
+);
 
-router.delete("/deleteContactById/:id", authentication, (req, res) => {
-  deleteContactById(req, res);
-});
+router.delete(
+  "/deleteContactById/:id",
+  /* authentication, */ (req, res) => {
+    deleteContactById(req, res);
+  }
+);
 
 module.exports = router;

@@ -1,3 +1,12 @@
+.conatact-content {
+  margin-top: 50px;
+  margin-left: 265px;
+  width: 100%;
+  .title {
+    @extend %title;
+  }
+}
+
 /* main {
   .container-top {
     padding: 60px;

@@ -12,16 +12,18 @@ const findUser = () => {
       users.forEach((element) => {
         const { firstName, lastName, email, profile, id } = element;
         let renderUser = `
-            <div>
-                <input type="checkbox" class="selectCont" />
-                <h3 class="name">${firstName}</h3>
+            <div class="user">
+                <input type="checkbox" class="select" />
+                <h3 class="firstName">${firstName}</h3>
                 <h3 class="lastName">${lastName}</h3>
                 <h3 class="email">${email}</h3>
                 <h3 class="profile">${profile}</h3>
-                <i class="fas fa-edit"></i>
+                <i class="fas fa-edit" 
+                    onclick="validationFormAdd(${id})">
+                </i>
                 <i class="far fa-trash-alt"
-                    onclick="deleteUser(${id})"
-                ></i>
+                  onclick="deleteUser(${id})">
+                </i>
             </div>
         `;
         usersContainer.insertAdjacentHTML("beforeend", renderUser);
@@ -45,15 +47,15 @@ const createUser = (Userdata) => {
       console.log(users);
       const { firstName, lastName, email, profile, id } = users;
       let renderUser = `
-            <div>
-                <input type="checkbox" class="selectCont" />
-                <h3 class="name">${firstName}</h3>
+            <div class="user">
+                <input type="checkbox" class="select" />
+                <h3 class="firstName">${firstName}</h3>
                 <h3 class="lastName">${lastName}</h3>
                 <h3 class="email">${email}</h3>
                 <h3 class="profile">${profile}</h3>
                 <i class="fas fa-edit"></i>
                 <i class="far fa-trash-alt"
-                   onclick="deleteUser(${id})"
+                    onclick="deleteUser(${id})"
                 ></i>
             </div>
         `;

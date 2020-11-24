@@ -12,7 +12,38 @@ $pricipal_color: #38d39f;
   font-family: $principal_font;
 }
 
+%title {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 140px;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 65px;
+    height: 3px;
+    background: $pricipal_color;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.btn {
+  border: 2px solid $pricipal_color;
+  &:hover {
+    background: $pricipal_color;
+    color: #ffffff;
+  }
+}
+
 @import "sass/index";
 @import "sass/header";
 @import "sass/users";
+@import "sass/companies";
 @import "sass/contact";
+@import "sass/region-city";

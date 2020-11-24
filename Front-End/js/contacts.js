@@ -1,8 +1,9 @@
 const contactsContainer = document.getElementById("contactsContainer");
 
 const findContacts = () => {
-  fetch("http://localhost:4000/api/contact/find").then((contactList) => {
-    contactList.json().then((contacts) => {
+  fetch("http://localhost:4000/api/contact/find")
+    .then((res) => res.json())
+    .then((contacts) => {
       console.log(contacts);
       contacts.forEach((element) => {
         const {
@@ -33,26 +34,6 @@ const findContacts = () => {
         contactsContainer.insertAdjacentHTML("beforeend", renderContacts);
       });
     });
-  });
 };
 
-const dataSet = findContacts();
-
-$(document).ready(function () {
-  $("#contacts").DataTable({
-    data: dataSet,
-    columns: [
-      { title: "First name" },
-      { title: "Last name" },
-      { title: "E-mail" },
-      { title: "Company" },
-      { title: "Regione" },
-      { title: "Country" },
-      { title: "City" },
-      { title: "Address" },
-      { title: "Interest" },
-    ],
-  });
-});
-
-/* --------------------------------------------------------------------------------------------------------- */
+findContacts();
