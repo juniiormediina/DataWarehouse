@@ -10,94 +10,79 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
-
-```
-Da un ejemplo
-```
+1. Instale y configure el motor de base de datos [MYSQL](https://www.mysql.com/downloads/).
+2. Instale [NodeJS](https://nodejs.org/es/).
+3. Debe contar con un editor de codigo, recomiendo [VScode](https://code.visualstudio.com/)
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+Estos son los pasos que deberás seguir para tener un entorno de desarrollo local
 
-_Dí cómo será ese paso_
+1. Ejecute el comando npm install dentro de la carpeta /Back-End, en su consola o terminal asi instalamos todos los paquetes necesarios para ejecutar el proyecto.
 
-```
-Da un ejemplo
-```
-
-_Y repite_
-
-```
-hasta finalizar
+```Bash
+npm install
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+Para iniciar el proyecto en el Front-End debe haber por lo menos un usuario Administrator registrado en la base de datos
+
+2. Por lo tanto debemos ejecutar el archivo database.sql ubicado dentro de la carpeta /Back-End en su Base de datos MYSQL, el mismo le creara la base de datos con su respectivas tablas y le añadira informacion como un usuario administrador para el cual al iniciar el proyecto en el lado del Front-End nos servira para poder acceder a nuestra app.
+
+3. Dentro de la carpeta /Back-End cree un archivo .env donde guardara las siguientes variables de entorno
+
+```Bash
+USER = Usuario de base de datos
+PASS = Contraseña de su usuario de base de datos
+
+NAME_DB = datawarehouse
+HOST = localhost
+
+JWT_SECRET = Una clave secreta para validadcion del Json Web Token
+```
+
+Una vez tenemos todos estos aspectos cubiertos ahora si podemos ejecutar nuestro proyecto
+
+4. Estando dentro de la carpeta /Back-End desde la terminal ejecutamos el siguiente comando
+
+```Bash
+npm start
+```
+
+En la terminal despues de ejecutar el comando anterior van a poder visualizar algo muy parecido a lo siguiente
+
+```Bash
+$ npm start
+
+> datawarehouse@1.0.0 start C:\Users\diazk\Documents\Projects\DataWarehouse\DataWarehouse\Back-End
+> node index.js
+
+Server started...
+Executing (default): SELECT 1+1 AS result
+Executing (default): CREATE TABLE IF NOT EXISTS `Users` (`id` INTEGER(10) NOT NULL auto_increment , `firstName` VARCHAR(50) NOT NULL, `lastName` VARCHAR(50) NOT NULL, `email` VARCHAR(50) NOT NULL, `profile` VARCHAR(20) NOT NULL, `password` VARCHAR(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): CREATE TABLE IF NOT EXISTS `Contacts` (`id` INTEGER NOT NULL auto_increment , `name` VARCHAR(50) NOT NULL, `lastname` VARCHAR(50) NOT NULL, `email` VARCHAR(50) NOT NULL, `company` VARCHAR(50) NOT NULL, `region` VARCHAR(50) NOT NULL, `country` VARCHAR(50) NOT NULL, `city` VARCHAR(50) NOT NULL, `address` VARCHAR(50) NOT NULL, `interest` VARCHAR(50) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): CREATE TABLE IF NOT EXISTS `Companies` (`id` INTEGER NOT NULL auto_increment , `name` VARCHAR(50) NOT NULL, `country` VARCHAR(50) NOT NULL, `city` VARCHAR(50) NOT NULL, `address` VARCHAR(50) NOT NULL, `email` VARCHAR(50) NOT NULL, `phone` VARCHAR(50) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): CREATE TABLE IF NOT EXISTS `Region` (`id` INTEGER NOT NULL auto_increment , `name` VARCHAR(50), PRIMARY KEY (`id`)) ENGINE=InnoDB;
+DB is connected
+Executing (default): CREATE TABLE IF NOT EXISTS `Country` (`id` INTEGER NOT NULL auto_increment , `name` VARCHAR(50), `RegionId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`RegionId`) REFERENCES `Region` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): CREATE TABLE IF NOT EXISTS `City` (`id` INTEGER NOT NULL auto_increment , `name` VARCHAR(15), `CountryId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`CountryId`) REFERENCES `Country` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `Companies`
+Executing (default): SHOW INDEX FROM `Contacts`
+Executing (default): SHOW INDEX FROM `Users`
+Executing (default): SHOW INDEX FROM `Country`
+Executing (default): SHOW INDEX FROM `Region`
+Executing (default): SHOW INDEX FROM `City`
+
+```
 
 ## Ejecutando las pruebas ⚙️
 
-_Explica como ejecutar las pruebas automatizadas para este sistema_
+Para hacer las pruebas debe de abrir en su navegador el archivo index.html e ingresar con alguno de los email y contraseña que se guardo en la base de datos al momento de ejecutar el archivo database.sql. Para mayor alcance de pruebas recomiendo el uso de los siguientes datos de un usuario administrador
 
-### Analice las pruebas end-to-end 🔩
-
-_Explica que verifican estas pruebas y por qué_
-
+```Bash
+Email : juan@correo.com
+Contraseña : 1234
 ```
-Da un ejemplo
-```
-
-### Y las pruebas de estilo de codificación ⌨️
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-## Despliegue 📦
-
-_Agrega notas adicionales sobre como hacer deploy_
-
-## Construido con 🛠️
-
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
-- [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-- [Maven](https://maven.apache.org/) - Manejador de dependencias
-- [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
-
-## Contribuyendo 🖇️
-
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
-
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
-## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
-
-## Autores ✒️
-
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
-- **Andrés Villanueva** - _Trabajo Inicial_ - [villanuevand](https://github.com/villanuevand)
-- **Fulanito Detal** - _Documentación_ - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto.
-
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
-
-## Expresiones de Gratitud 🎁
-
-- Comenta a otros sobre este proyecto 📢
-- Invita una cerveza 🍺 o un café ☕ a alguien del equipo.
-- Da las gracias públicamente 🤓.
-- etc.
 
 ---
 
-⌨️ con ❤️ por [Junior Medina](https://github.com/juniiormediina) 😊
+Hecho ⌨️ con ❤️ por [Junior Medina](https://github.com/juniiormediina) 😊

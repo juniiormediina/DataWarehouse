@@ -43,12 +43,9 @@ router.post("/signin", (req, res) => {
     });
 });
 
-router.get(
-  "/find",
-  /* authentication, authorization, */ (req, res) => {
-    find(req, res);
-  }
-);
+router.get("/find", authentication, authorization, (req, res) => {
+  find(req, res);
+});
 
 router.get(
   "/findById/:id",

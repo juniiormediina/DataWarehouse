@@ -2,8 +2,41 @@ let formAdd = document.querySelectorAll("#userForm input,select");
 let usersContainer = document.getElementById("usersContainer");
 let notification = document.getElementById("notification");
 let confirmDelete = document.getElementById("confirmDelete");
+let token = JSON.parse(window.localStorage.getItem("token"));
 
 console.log(formAdd);
+
+const createUser = (Userdata) => {
+  fetch("http://localhost:4000/api/users/signup", {
+    method: "POST",
+    body: Userdata,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  }).then((user) => {
+    user.json().then((users) => {
+      console.log(users);
+      const { firstName, lastName, email, profile, id } = users;
+      let renderUser = `
+            <div class="user">
+                <input type="checkbox" class="select" />
+                <h3 class="firstName">${firstName}</h3>
+                <h3 class="lastName">${lastName}</h3>
+                <h3 class="email">${email}</h3>
+                <h3 class="profile">${profile}</h3>
+                <i class="fas fa-edit"></i>
+                <i class="far fa-trash-alt"
+                    onclick="deleteUser(${id})"
+                ></i>
+            </div>
+        `;
+      usersContainer.insertAdjacentHTML("beforeend", renderUser);
+    });
+  });
+  close();
+  clear();
+};
 
 const findUser = () => {
   fetch("http://localhost:4000/api/users/find").then((userList) => {
@@ -34,38 +67,6 @@ const findUser = () => {
 
 findUser();
 
-const createUser = (Userdata) => {
-  fetch("http://localhost:4000/api/users/signup", {
-    method: "POST",
-    body: Userdata,
-    headers: {
-      "Content-Type": "application/json",
-      //TODO:   Authorization: "Bearer " + token,
-    },
-  }).then((user) => {
-    user.json().then((users) => {
-      console.log(users);
-      const { firstName, lastName, email, profile, id } = users;
-      let renderUser = `
-            <div class="user">
-                <input type="checkbox" class="select" />
-                <h3 class="firstName">${firstName}</h3>
-                <h3 class="lastName">${lastName}</h3>
-                <h3 class="email">${email}</h3>
-                <h3 class="profile">${profile}</h3>
-                <i class="fas fa-edit"></i>
-                <i class="far fa-trash-alt"
-                    onclick="deleteUser(${id})"
-                ></i>
-            </div>
-        `;
-      usersContainer.insertAdjacentHTML("beforeend", renderUser);
-    });
-  });
-  close();
-  clear();
-};
-
 const validationFormAdd = () => {
   for (let i = 0; i < formAdd.length; i++) {
     /* const element = formAdd[i]; */
@@ -88,27 +89,24 @@ const validationFormAdd = () => {
   createUser(dataJSON);
 };
 
-let openDelete = () => {
-  $("#deleteConfirm").modal("show");
-};
-
+/* Delete users from the page */
 const deleteUser = (id) => {
-  /* let objectId = { id: id };
-    let jsonId = JSON.stringify(objectId); */
   openDelete();
   confirmDelete.addEventListener("click", () => {
     fetch(`http://localhost:4000/api/users/deleteById/${id}`, {
       method: "DELETE",
       /* headers: {
-          "Content-Type": "application/json",
-          //   Authorization: "Bearer " + token,
-        }, */
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }, */
     }).then((user) => {
       console.log(user);
       location.reload();
     });
   });
 };
+
+/* functions for closing, cleaning and deletion confirmation modal */
 
 let close = () => {
   $("#addUser").modal("hide");
@@ -118,4 +116,8 @@ let clear = () => {
   formAdd.forEach((input) => {
     input.value = "";
   });
+};
+
+let openDelete = () => {
+  $("#deleteConfirm").modal("show");
 };
