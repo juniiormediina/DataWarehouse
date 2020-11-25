@@ -6,7 +6,7 @@ Herramienta que permite a una compañía de Marketing administrar todos los cont
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Mira **Deployment** para conocer como desplegar el proyecto.
+Sigue las siguientes **Instrucciones** para conocer como iniciar el proyecto.
 
 ### Pre-requisitos 📋
 
