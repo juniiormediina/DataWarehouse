@@ -2,25 +2,25 @@ const Contact = require("../models/Contacts.model");
 
 const createContact = async (req, res) => {
   const {
-    name,
+    fullName,
     lastname,
     email,
     company,
     region,
     country,
     city,
-    address,
+    position,
     interest,
   } = req.body;
   const newContact = new Contact({
-    name,
+    fullName,
     lastname,
     email,
     company,
     region,
     country,
     city,
-    address,
+    position,
     interest,
   });
   const savedContact = await newContact.save();

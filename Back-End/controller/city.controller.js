@@ -1,16 +1,17 @@
 const City = require("../models/City.model");
 
 const createCity = async (req, res) => {
-  const { name } = req.body;
+  const { name, CountryId } = req.body;
   const newCity = new City({
     name,
+    CountryId,
   });
   const savedCity = await newCity.save();
   res.status(200).json(savedCity);
 };
 
-const find = (req, res) => {
-  City.findAll()
+const findCountryCity = (countryId) => {
+  /* City.findAll()
     .then((city) => {
       res.status(200).json(city);
     })
@@ -18,7 +19,33 @@ const find = (req, res) => {
       res.status(500).json({
         message: "Sorry, the server has presented an error. Try again later",
       });
-    });
+    }); */
+
+  /*   let { CountryId } = req.params;
+  City.findAll({ where: { CountryId: CountryId } })
+    .then((countryCity) => {
+      res.status(200).json(countryCity);
+      console.log("todo esta funcionando");
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "Sorry, the server has presented an error. Try again later",
+      });
+    }); */
+
+  return new Promise((res, rejc) => {
+    City.findAll({ where: { countryId: countryId } })
+      .then((response) => {
+        res(response);
+      })
+      .catch(() => {
+        rejc({
+          status: 500,
+          message:
+            "Tenemos problemas en el servidor, por favor intente mas tarde",
+        });
+      });
+  });
 };
 
 const findCityById = (req, res) => {
@@ -63,7 +90,7 @@ const deleteCityById = (req, res) => {
 
 module.exports = {
   createCity,
-  find,
+  findCountryCity,
   findCityById,
   updateCityById,
   deleteCityById,

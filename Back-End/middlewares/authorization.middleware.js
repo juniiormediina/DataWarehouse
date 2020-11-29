@@ -1,6 +1,6 @@
 const authorization = async (req, res, next) => {
-  const { profile } = req.usuario;
-  if (profile !== "administrator") {
+  const { profile } = profile;
+  if (profile !== "Administrator") {
     res
       .status(401)
       .json(

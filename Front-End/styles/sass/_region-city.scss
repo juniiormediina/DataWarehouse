@@ -1,8 +1,123 @@
 .region-city-content {
   margin-top: 50px;
+  margin-bottom: 50px;
   margin-left: 265px;
   width: 100%;
   .title {
     @extend %title;
+  }
+  .modal {
+    .modal-dialog {
+      max-width: 790px;
+      .modal-content {
+        border-radius: 5px;
+        width: 720px;
+        .modal-header {
+          background-color: $pricipal_color;
+
+          .modal-title {
+            color: white;
+          }
+        }
+
+        .modal-body {
+          .emailExist {
+            color: red;
+            font-size: small;
+          }
+
+          .passwordMessage {
+            color: red;
+            font-size: small;
+          }
+
+          .lackFields {
+            color: red;
+            font-size: small;
+          }
+        }
+      }
+    }
+  }
+
+  .regions-city-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: transparent 1px;
+    font-size: large;
+
+    .regionTittle {
+      display: inline-block;
+    }
+    .regionTree {
+      text-decoration: none;
+      color: black;
+    }
+    .card-bodyCo {
+      border: transparent 1px;
+      background-color: white;
+      font-size: large;
+
+      .countryContainer {
+        border: none;
+        background-color: white;
+        font-size: large;
+        margin-left: 40px;
+
+        .coTitle {
+          display: inline-block;
+          border: none;
+        }
+      }
+
+      .cityContainer {
+        border: transparent 1px;
+        background-color: white;
+        margin-left: 80px;
+
+        .card-bodyCi {
+          border: transparent 1px;
+          background-color: white;
+          display: grid;
+          grid-template-columns: 10% 3% 10%;
+        }
+      }
+    }
+
+    .fa-edit {
+      border-radius: 5px;
+      width: 15px;
+      height: 18px;
+      align-self: center;
+      margin-left: 15px;
+      &:hover {
+        font-size: 20px;
+        transition: 0.2s ease-in;
+      }
+    }
+
+    .fa-trash-alt {
+      border-radius: 5px;
+      width: 16px;
+      height: 18px;
+      align-self: center;
+      margin-left: 10px;
+      &:hover {
+        font-size: 20px;
+        transition: 0.2s ease-in;
+      }
+    }
+
+    .fa-plus {
+      border-radius: 50%;
+      width: 17px;
+      height: 18px;
+      align-self: center;
+      margin-left: 10px;
+      &:hover {
+        font-size: 20px;
+        transition: 0.2s ease-in;
+      }
+    }
   }
 }

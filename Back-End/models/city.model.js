@@ -6,7 +6,7 @@ const City = sequelize.define(
   "City",
   {
     name: {
-      type: DataTypes.STRING(15),
+      type: DataTypes.STRING(50),
     },
   },
   {

@@ -1,5 +1,5 @@
-let usersView = document.getElementById("usersView");
 let signOut = document.getElementById("signOut");
+let usersView = document.getElementById("usersView");
 
 const parseJwt = (token) => {
   try {
@@ -14,15 +14,13 @@ let data = parseJwt(window.localStorage.getItem("token"));
 if (!data) {
   window.location = "../index.html";
 } else {
-  if (data.profile !== "administrator") {
+  if (data.profile !== "Administrator") {
     usersView.style.display = "none";
   }
 }
 
 signOut.addEventListener("click", () => {
-  alert(`a moment ${data.firstName} we are closing session
-        ¡¡¡¡ESTO LO PUEDO MEJORAR UN POCO!!!!        
-  `);
+  alert(`a moment ${data.firstName} we are closing session`);
   window.location = "../index.html";
   localStorage.clear();
 });

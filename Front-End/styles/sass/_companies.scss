@@ -5,4 +5,207 @@
   .title {
     @extend %title;
   }
+
+  .modal {
+    .modal-dialog {
+      max-width: 790px;
+      .modal-content {
+        border-radius: 5px;
+        width: 792px;
+        .modal-header {
+          background-color: $pricipal_color;
+
+          .modal-title {
+            color: white;
+          }
+        }
+
+        .modal-body {
+          .emailExist {
+            color: red;
+            font-size: small;
+          }
+
+          .passwordMessage {
+            color: red;
+            font-size: small;
+          }
+
+          .lackFields {
+            color: red;
+            font-size: small;
+          }
+          .percent {
+            margin-top: -40px;
+            margin-left: 115px;
+          }
+        }
+      }
+    }
+  }
+
+  .companiesTitles {
+    display: grid;
+    margin-top: 40px;
+    grid-template-columns: 5% 16% 12% 12% 14.5% 20% 9%;
+    .select {
+      grid-column: 1/2;
+      margin-left: 25px;
+      margin-right: 10px;
+      align-self: center;
+    }
+    .ContainerTitle1 {
+      display: flex;
+      grid-column: 2/3;
+
+      .name {
+        font-size: larger;
+      }
+    }
+    .ContainerTitle2 {
+      display: flex;
+      grid-column: 3/4;
+
+      .country {
+        font-size: larger;
+      }
+    }
+    .ContainerTitle3 {
+      display: flex;
+      grid-column: 4/5;
+
+      .city {
+        font-size: larger;
+      }
+    }
+    .ContainerTitle4 {
+      display: flex;
+      grid-column: 5/6;
+
+      .address {
+        font-size: larger;
+      }
+    }
+    .ContainerTitle5 {
+      display: flex;
+      grid-column: 6/7;
+      .email {
+        font-size: larger;
+      }
+    }
+    .ContainerTitle6 {
+      display: flex;
+      grid-column: 7/8;
+      .phone {
+        font-size: larger;
+      }
+    }
+    .ContainerTitle7 {
+      display: flex;
+      grid-column: 8/9;
+      margin-left: 28px;
+      .actions {
+        font-size: larger;
+      }
+    }
+
+    .fa-arrow-up {
+      font-size: 10px;
+      margin-left: 10px;
+      z-index: 20;
+    }
+    .fa-arrow-down {
+      font-size: 10px;
+      margin-left: -9px;
+      margin-top: 12px;
+      z-index: 20;
+    }
+  }
+
+  .companies {
+    display: grid;
+    border: transparent 1px;
+    margin-top: 10px;
+    line-height: 0px;
+    grid-template-columns: 4% 16.5% 12% 12% 15% 20% 12.5% 2.5%;
+    border-left: 7px solid $pricipal_color;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 10px 20px 0px hsl(180, 8%, 52%);
+    &:hover {
+      background-color: rgba(201, 196, 196, 0.836);
+    }
+    .select {
+      align-self: center;
+      grid-column: 1/2;
+      grid-row: 1/2;
+      margin-left: 18px;
+    }
+    .name {
+      grid-column: 2/3;
+      grid-row: 1/2;
+      margin-right: 20px;
+      font-size: larger;
+    }
+    .country {
+      grid-column: 3/4;
+      grid-row: 1/2;
+      margin-right: 20px;
+      font-size: larger;
+    }
+    .city {
+      grid-column: 4/5;
+      grid-row: 1/2;
+      font-size: larger;
+      margin-top: auto;
+    }
+    .address {
+      grid-column: 5/6;
+      grid-row: 1/2;
+      margin-top: -2px;
+      font-size: larger;
+    }
+    .email {
+      grid-column: 6/7;
+      grid-row: 1/2;
+      font-size: larger;
+      align-self: center;
+    }
+    .phone {
+      grid-column: 7/8;
+      grid-row: 1/2;
+      font-size: larger;
+      align-self: center;
+    }
+
+    .fa-edit {
+      border-radius: 5px;
+      grid-column: 8/9;
+      grid-row: 1/2;
+      width: 15px;
+      height: 15px;
+      align-self: center;
+      &:hover {
+        font-size: 20px;
+        transition: 0.2s ease-in;
+      }
+    }
+    .fa-trash-alt {
+      border-radius: 5px;
+      grid-column: 9/10;
+      grid-row: 1/2;
+      width: 16px;
+      height: 16px;
+      align-self: center;
+      &:hover {
+        font-size: 20px;
+        transition: 0.2s ease-in;
+      }
+    }
+
+    /* .modal-footer {
+      display: flex;
+      justify-content: center;
+    } */
+  }
 }

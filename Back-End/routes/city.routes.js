@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
   createCity,
-  find,
+  findCountryCity,
   findCityById,
   updateCityById,
   deleteCityById,
@@ -20,9 +20,17 @@ router.post(
 );
 
 router.get(
-  "/find",
+  "/findCountryCity/:CountryId",
   /* authentication, */ (req, res) => {
-    find(req, res);
+    /* findCountryCity(req, res); */
+    let { CountryId } = req.params;
+    findCountryCity(CountryId)
+      .then((cities) => {
+        res.status(200).json(cities);
+      })
+      .catch((err) => {
+        res.status(500).json("Error interno, por favor intente mas tarde");
+      });
   }
 );
 

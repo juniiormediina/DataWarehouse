@@ -4,18 +4,10 @@ const sequelize = require("../models/index");
 const Contacts = sequelize.define(
   "Contacts",
   {
-    name: {
+    fullName: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    lastname: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
-    /*     role: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    }, */
     email: {
       type: DataTypes.STRING(50),
       allowNull: false,
@@ -36,12 +28,12 @@ const Contacts = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    address: {
+    position: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
     interest: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.INTEGER(10),
       allowNull: false,
     },
   },

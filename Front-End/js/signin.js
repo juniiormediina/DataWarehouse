@@ -70,7 +70,7 @@ const getData = (data) => {
         let data = JSON.stringify(token);
         console.log(token);
         window.localStorage.setItem("token", data);
-        window.location.href = "../contact.html";
+        window.location.href = "contact.html";
       });
     }
   });

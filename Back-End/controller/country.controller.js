@@ -1,9 +1,10 @@
 const Country = require("../models/Country.model");
 
 const createCountry = async (req, res) => {
-  const { name } = req.body;
+  const { name, RegionId } = req.body;
   const newCountry = new Country({
     name,
+    RegionId,
   });
   const savedCountry = await newCountry.save();
   res.status(200).json(savedCountry);

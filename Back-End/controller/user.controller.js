@@ -117,8 +117,8 @@ const updateById = (req, res) => {
   let data = req.body;
 
   User.update(data, { where: { id: id } })
-    .then((response) => {
-      if (response[0] === 1)
+    .then((user) => {
+      if (user[0] === 1)
         res.status(200).json({ message: " User has been updated." });
       else res.status(400).json({ message: "User could not be updated" });
     })

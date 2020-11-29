@@ -11,7 +11,7 @@ const authentication = (req, res, next) => {
     if (err) {
       res.status(400).json("User can not verify");
     }
-    req.usuario = decoded;
+    profile = decoded;
     next();
   });
 };
