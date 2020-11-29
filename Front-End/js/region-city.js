@@ -241,7 +241,7 @@ const addCountry = (data) => {
   });
 };
 
-const getDataForAddCity = (countryId) => {
+const getDataForAddCity = (CountryId) => {
   openCity();
 
   saveCity.addEventListener("click", () => {
@@ -251,7 +251,7 @@ const getDataForAddCity = (countryId) => {
     else {
       let dataObject = {
         name: cityName.value,
-        countryId: countryId,
+        CountryId: CountryId,
       };
       let data = JSON.stringify(dataObject);
       addCity(data);
@@ -273,8 +273,8 @@ const addCity = (data) => {
       notificationCity.innerHTML = "A country with this name already exists";
     else {
       res.json().then((city) => {
-        const { id, name, countryId } = city;
-        let cityCard = document.querySelector(`#countryCard${countryId}`);
+        const { id, name, CountryId } = city;
+        let cityCard = document.querySelector(`#cityCollapse${CountryId}`);
         let renderCity = `
           <div class="card card-bodyCi" id="cityCard${id}">
             <h6>${name}</h6>
@@ -282,6 +282,7 @@ const addCity = (data) => {
             <i class="far fa-trash-alt" onclick="deleteCity(${id})"></i>
           </div>
         `;
+        console.log(renderCity);
         cityCard.insertAdjacentHTML("beforeend", renderCity);
         closeCity();
       });

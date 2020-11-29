@@ -73,17 +73,13 @@
 
         <main class="company-content">
           <h2 class="title">Companies</h2>
-          <button class="btn">
-            <i
-              class="fas fa-user-plus"
-              data-toggle="modal"
-              data-target="#addCompany"
-            ></i>
+          <button class="btn" data-toggle="modal" data-target="#addCompany">
+            <i class="fas fa-user-plus"></i>
             Add Company
           </button>
 
           <!-- Table section -->
-          <section class="usersList" id="usersList">
+          <section class="companyList" id="companiesList">
             <div class="companiesTitles">
               <input type="checkbox" class="select" />
               <div class="ContainerTitle1">
@@ -139,7 +135,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">New Company</h5>
+                    <h5 class="modal-title" id="ModalCompany">New Company</h5>
                     <button
                       type="button"
                       class="close"
@@ -150,7 +146,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form id="contactForm">
+                    <form id="companyForm">
                       <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="CompanyName"><b>Name</b></label>
@@ -203,15 +199,16 @@
                         </div>
                       </div>
                     </form>
+                    <p id="notification" class="lackFields"></p>
                   </div>
                   <div class="modal-footer">
                     <button
                       type="button"
                       class="btn"
-                      onclick="addUser()"
-                      id="saveUser"
+                      onclick="getDataForAddCompany()"
+                      id="saveCompany"
                     >
-                      Save Contact
+                      Save Company
                     </button>
                     <button
                       type="button"
@@ -240,7 +237,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="deleteConfirmLabel">
-                      Are you sure you want to delete the contact?
+                      Are you sure you want to delete the company?
                     </h5>
                     <button
                       type="button"

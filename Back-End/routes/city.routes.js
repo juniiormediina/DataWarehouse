@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
   createCity,
+  find,
   findCountryCity,
   findCityById,
   updateCityById,
@@ -19,10 +20,13 @@ router.post(
   }
 );
 
+router.get("/find", (req, res) => {
+  find(req, res);
+});
+
 router.get(
   "/findCountryCity/:CountryId",
   /* authentication, */ (req, res) => {
-    /* findCountryCity(req, res); */
     let { CountryId } = req.params;
     findCountryCity(CountryId)
       .then((cities) => {

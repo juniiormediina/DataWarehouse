@@ -10,8 +10,8 @@ const createCity = async (req, res) => {
   res.status(200).json(savedCity);
 };
 
-const findCountryCity = (countryId) => {
-  /* City.findAll()
+const find = (req, res) => {
+  City.findAll()
     .then((city) => {
       res.status(200).json(city);
     })
@@ -19,8 +19,10 @@ const findCountryCity = (countryId) => {
       res.status(500).json({
         message: "Sorry, the server has presented an error. Try again later",
       });
-    }); */
+    });
+};
 
+const findCountryCity = (CountryId) => {
   /*   let { CountryId } = req.params;
   City.findAll({ where: { CountryId: CountryId } })
     .then((countryCity) => {
@@ -34,7 +36,7 @@ const findCountryCity = (countryId) => {
     }); */
 
   return new Promise((res, rejc) => {
-    City.findAll({ where: { countryId: countryId } })
+    City.findAll({ where: { CountryId: CountryId } })
       .then((response) => {
         res(response);
       })
@@ -90,6 +92,7 @@ const deleteCityById = (req, res) => {
 
 module.exports = {
   createCity,
+  find,
   findCountryCity,
   findCityById,
   updateCityById,

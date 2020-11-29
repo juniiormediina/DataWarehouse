@@ -12,7 +12,7 @@ const parseJwt = (token) => {
 let data = parseJwt(window.localStorage.getItem("token"));
 
 if (!data) {
-  window.location = "../index.html";
+  window.location = "index.html";
 } else {
   if (data.profile !== "Administrator") {
     usersView.style.display = "none";
@@ -20,7 +20,8 @@ if (!data) {
 }
 
 signOut.addEventListener("click", () => {
-  alert(`a moment ${data.firstName} we are closing session`);
-  window.location = "../index.html";
+  alert(`A moment ${data.firstName}, we are closing your session.
+      If you want to continue using our app to log back`);
+  window.location = "index.html";
   localStorage.clear();
 });

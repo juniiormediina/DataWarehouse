@@ -135,7 +135,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">New Contact</h5>
+                    <h5 class="modal-title" id="ModalContact">New Contact</h5>
                     <button
                       type="button"
                       class="close"
@@ -153,7 +153,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            id="inputName"
+                            id="inputFullName"
                           />
                         </div>
                         <div class="form-group col-md-4">
@@ -174,23 +174,28 @@
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputRegion">Region</label>
-                          <select id="inputRegion" class="form-control">
+                          <select
+                            id="inputRegion"
+                            class="form-control"
+                            onchange="showCountries()"
+                          >
                             <option selected>Choose...</option>
-                            <option>...</option>
                           </select>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputCountry">Country</label>
-                          <select id="inputCountry" class="form-control">
+                          <select
+                            id="inputCountry"
+                            class="form-control"
+                            onchange="showCities()"
+                          >
                             <option selected>Choose...</option>
-                            <option>...</option>
                           </select>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputCity">City</label>
                           <select id="inputCity" class="form-control">
                             <option selected>Choose...</option>
-                            <option>...</option>
                           </select>
                         </div>
                         <div class="form-group col-md-4">
@@ -218,13 +223,14 @@
                         </div>
                       </div>
                     </form>
+                    <p id="notification" class="lackFields"></p>
                   </div>
                   <div class="modal-footer">
                     <button
                       type="button"
                       class="btn"
-                      onclick="addUser()"
-                      id="saveUser"
+                      onclick="getDataForAddContact()"
+                      id="saveContact"
                     >
                       Save Contact
                     </button>

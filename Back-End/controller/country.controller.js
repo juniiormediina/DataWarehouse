@@ -29,6 +29,34 @@ const findCountryById = (req, res) => {
   });
 };
 
+const findRegionCountry = (RegionId) => {
+  /*   let { CountryId } = req.params;
+  City.findAll({ where: { CountryId: CountryId } })
+    .then((countryCity) => {
+      res.status(200).json(countryCity);
+      console.log("todo esta funcionando");
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "Sorry, the server has presented an error. Try again later",
+      });
+    }); */
+
+  return new Promise((res, rejc) => {
+    Country.findAll({ where: { RegionId: RegionId } })
+      .then((response) => {
+        res(response);
+      })
+      .catch(() => {
+        rejc({
+          status: 500,
+          message:
+            "Tenemos problemas en el servidor, por favor intente mas tarde",
+        });
+      });
+  });
+};
+
 const updateCountryById = (req, res) => {
   let id = req.params.id;
   let data = req.body;
@@ -66,6 +94,7 @@ module.exports = {
   createCountry,
   find,
   findCountryById,
+  findRegionCountry,
   updateCountryById,
   deleteCountryById,
 };

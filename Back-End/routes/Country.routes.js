@@ -5,6 +5,7 @@ const {
   createCountry,
   find,
   findCountryById,
+  findRegionCountry,
   updateCountryById,
   deleteCountryById,
 } = require("../controller/country.controller");
@@ -23,6 +24,20 @@ router.get(
   "/find",
   /* authentication, */ (req, res) => {
     find(req, res);
+  }
+);
+
+router.get(
+  "/findRegionCountry/:RegionId",
+  /* authentication, */ (req, res) => {
+    let { RegionId } = req.params;
+    findRegionCountry(RegionId)
+      .then((Country) => {
+        res.status(200).json(Country);
+      })
+      .catch((err) => {
+        res.status(500).json("Error interno, por favor intente mas tarde");
+      });
   }
 );
 
