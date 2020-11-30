@@ -10,6 +10,7 @@ const parseJwt = (token) => {
 };
 
 let data = parseJwt(window.localStorage.getItem("token"));
+let token = JSON.parse(window.localStorage.getItem("token"));
 
 if (!data) {
   window.location = "index.html";

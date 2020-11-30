@@ -50,8 +50,7 @@ const findRegionCountry = (RegionId) => {
       .catch(() => {
         rejc({
           status: 500,
-          message:
-            "Tenemos problemas en el servidor, por favor intente mas tarde",
+          message: "Sorry, the server has presented an error. Try again later",
         });
       });
   });

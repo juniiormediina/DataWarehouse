@@ -1,4 +1,3 @@
-let token = JSON.parse(window.localStorage.getItem("token"));
 let regions_city_container = document.getElementById("regions_city_container");
 /*  */
 let regionName = document.getElementById("regionName");
@@ -25,7 +24,7 @@ const findRegion = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((regionList) => {
     regionList.json().then((regionList) => {
@@ -58,40 +57,42 @@ const findRegion = () => {
 
 findRegion();
 
-const findCountry = (id) => {
-  fetch(`http://localhost:4000/api/country/findCountryById/${id}`, {
+const findCountry = (RegionId) => {
+  fetch(`http://localhost:4000/api/country/findRegionCountry/${RegionId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((country) => {
-    country.json().then((element) => {
-      const { id, name, RegionId } = element;
-      let countryCard = document.querySelector(`#countryCard${RegionId}`);
-      let renderCountry = `
-        <div class="countryContainer" id="countryC${id}">
-          <h4 class="coTitle">
-            <a
-              class="regionTree"
-              data-toggle="collapse"
-              href="#cityCollapse${id}"
-              role="button"
-              aria-expanded="false"
-              aria-controls="multiCollapseExample1"
-            >${name}</a>
-          </h4>
-          <i class="fas fa-edit" onclick="getDataForUpdateCountry(${id}, '${name}')"></i>
-          <i class="far fa-trash-alt" onclick="deleteCountry(${id})"></i>
-          <i class="fas fa-plus" onclick="getDataForAddCity(${id})"></i>
-        </div>
-        <div class="col cityContainer">
-          <div class="collapse multi-collapse" id="cityCollapse${id}">
+    country.json().then((country) => {
+      country.forEach((element) => {
+        const { id, name, RegionId } = element;
+        let countryCard = document.querySelector(`#countryCard${RegionId}`);
+        let renderCountry = `
+          <div class="countryContainer" id="countryC${id}">
+            <h4 class="coTitle">
+              <a
+                class="regionTree"
+                data-toggle="collapse"
+                href="#cityCollapse${id}"
+                role="button"
+                aria-expanded="false"
+                aria-controls="multiCollapseExample1"
+              >${name}</a>
+            </h4>
+            <i class="fas fa-edit" onclick="getDataForUpdateCountry(${id}, '${name}')"></i>
+            <i class="far fa-trash-alt" onclick="deleteCountry(${id})"></i>
+            <i class="fas fa-plus" onclick="getDataForAddCity(${id})"></i>
           </div>
-        </div>
-      `;
-      countryCard.insertAdjacentHTML("beforeend", renderCountry);
-      findCity(id);
+          <div class="col cityContainer">
+            <div class="collapse multi-collapse" id="cityCollapse${id}">
+            </div>
+          </div>
+        `;
+        countryCard.insertAdjacentHTML("beforeend", renderCountry);
+        findCity(id);
+      });
     });
   });
 };
@@ -101,7 +102,7 @@ const findCity = (CountryId) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((city) => {
     city.json().then((city) => {
@@ -144,7 +145,7 @@ const addRegion = (data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((res) => {
     if (res.status === 400)
@@ -180,7 +181,6 @@ const addRegion = (data) => {
 
 const getDataForAddCountry = (RegionId) => {
   openCountry();
-
   saveCountry.addEventListener("click", () => {
     let countryData = CountryName.value;
     if (countryData === "")
@@ -204,7 +204,7 @@ const addCountry = (data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((res) => {
     if (res.status === 400)
@@ -258,7 +258,7 @@ const getDataForAddCity = (CountryId) => {
     }
   });
 };
-/* aqui el error */
+
 const addCity = (data) => {
   event.preventDefault;
   fetch("http://localhost:4000/api/city/createCity", {
@@ -266,7 +266,7 @@ const addCity = (data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((res) => {
     if (res.status === 400)
@@ -282,7 +282,6 @@ const addCity = (data) => {
             <i class="far fa-trash-alt" onclick="deleteCity(${id})"></i>
           </div>
         `;
-        console.log(renderCity);
         cityCard.insertAdjacentHTML("beforeend", renderCity);
         closeCity();
       });
@@ -296,7 +295,7 @@ const getDataForUpdateRegion = (id, name) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((regionEdit) => {
     regionEdit.json().then((response) => {
@@ -322,7 +321,7 @@ const updateRegion = (id, data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((regionUpdate) => {
     regionUpdate.json().then((response) => {
@@ -336,7 +335,7 @@ const getDataForUpdateCountry = (id, name) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((country) => {
     country.json().then((response) => {
@@ -361,7 +360,7 @@ const updateCountry = (id, data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((countryUpdate) => {
     countryUpdate.json().then((response) => {
@@ -375,7 +374,7 @@ const getDataForUpdateCity = (id, name) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((city) => {
     city.json().then((response) => {
@@ -400,7 +399,7 @@ const updateCity = (id, data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((cityUpdate) => {
     cityUpdate.json().then((response) => {
@@ -417,7 +416,7 @@ const deleteRegion = (id) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        //Authorization: "Bearer " + token,
+        Authorization: "Bearer " + token,
       },
     }).then((response) => {
       location.reload();
@@ -427,13 +426,12 @@ const deleteRegion = (id) => {
 
 const deleteCountry = (id) => {
   OpenCountryDelete();
-
   confirmDeleteCountry.addEventListener("click", () => {
     fetch(`http://localhost:4000/api/country/deleteCountryById/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        //Authorization: "Bearer " + token,
+        Authorization: "Bearer " + token,
       },
     }).then((response) => {
       location.reload();
@@ -448,9 +446,9 @@ const deleteCity = (id) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        //Authorization: "Bearer " + token,
+        Authorization: "Bearer " + token,
       },
-    }).then((response) => {
+    }).then(() => {
       location.reload();
     });
   });

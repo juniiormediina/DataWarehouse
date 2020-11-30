@@ -1,5 +1,3 @@
-let token = JSON.parse(window.localStorage.getItem("token"));
-
 let formAdd = document.querySelectorAll("#contactForm input,select");
 let notification = document.getElementById("notification");
 const contactsContainer = document.getElementById("contactsContainer");
@@ -17,7 +15,7 @@ let renderRegions = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((regionCard) => {
     regionCard.json().then((regionCard) => {
@@ -35,7 +33,7 @@ let renderCountries = (regionId) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((Countries) => {
     Countries.json().then((countries) => {
@@ -75,12 +73,12 @@ let getSelectedOption = (sel) => {
   return opt;
 };
 
-let renderCities = (countryId) => {
-  fetch(`http://localhost:4000/api/city/findCountryCity/${countryId}`, {
+let renderCities = (CountryId) => {
+  fetch(`http://localhost:4000/api/city/findCountryCity/${CountryId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((cityCard) => {
     cityCard.json().then((cityCard) => {
@@ -101,7 +99,7 @@ const findContacts = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   })
     .then((res) => res.json())
@@ -184,7 +182,7 @@ const addContact = (data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((res) => {
     if (res.status === 400)
@@ -243,7 +241,7 @@ const getDataForUpdateContact = (id) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((contact) => {
     contact.json().then((element) => {
@@ -313,7 +311,7 @@ const updateContact = (id, data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((contact) => {
     contact.json().then((response) => {
@@ -330,7 +328,7 @@ const deleteContact = (id) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: "Bearer " + token,
+        Authorization: "Bearer " + token,
       },
     }).then((response) => {
       location.reload();
@@ -360,3 +358,197 @@ let open = () => {
 let openDelete = () => {
   $("#deleteConfirm").modal("show");
 };
+
+/* Sort tags */
+
+function sortByNameA() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("contactsContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".contact");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[0];
+      y = rows[i + 1].getElementsByTagName("h3")[0];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByNameZ() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("contactsContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".contact");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[0];
+      y = rows[i + 1].getElementsByTagName("h3")[0];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByCountryA() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("contactsContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".contact");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[1];
+      y = rows[i + 1].getElementsByTagName("h3")[1];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByCountryZ() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("contactsContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".contact");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[1];
+      y = rows[i + 1].getElementsByTagName("h3")[1];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByCompanyA() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("contactsContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".contact");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[2];
+      y = rows[i + 1].getElementsByTagName("h3")[2];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByCompanyZ() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("contactsContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".contact");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[2];
+      y = rows[i + 1].getElementsByTagName("h3")[2];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByPositionA() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("contactsContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".contact");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[3];
+      y = rows[i + 1].getElementsByTagName("h3")[3];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByPositionZ() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("contactsContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".contact");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[3];
+      y = rows[i + 1].getElementsByTagName("h3")[3];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}

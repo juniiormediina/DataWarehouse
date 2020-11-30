@@ -25,14 +25,14 @@ const signUp = async (data) => {
       !data.password ||
       !data.profile
     ) {
-      rejc({ status: 406, message: "Por favor llene todos los campos" });
+      rejc({ status: 406, message: "Please fill all fields" });
     } else {
       bcrypt.hash(data.password, 10, (err, hash) => {
         if (err) {
           rejc({
             status: 500,
             message:
-              "Tenemos problemas en el servidor, por favor intente mas tarde",
+              "Sorry, the server has presented an error. Try again later",
           });
         } else {
           data.password = hash;
@@ -44,7 +44,7 @@ const signUp = async (data) => {
               rejc({
                 status: 500,
                 message:
-                  "Tenemos problemas en el servidor, por favor intente mas tarde",
+                  "Sorry, the server has presented an error. Try again later",
               });
             });
         }
@@ -73,7 +73,7 @@ const signIn = (email, password) => {
   res.status(200).json({ token }); */
   return new Promise(async (res, rejc) => {
     if (!email || !password) {
-      rejc({ status: 406, message: "Faltan campos, por favor envielos" });
+      rejc({ status: 406, message: "Please fill all fields" });
     } else {
       let user = await User.findOne({ where: { email: email } });
       let comparePassword = await bcrypt.compare(password, user.password);
@@ -86,7 +86,7 @@ const signIn = (email, password) => {
           })
         );
       } else {
-        rejc({ status: 401, message: `Usuario o contraseña no validos` });
+        rejc({ status: 401, message: `Invalid password o user` });
       }
     }
   });
@@ -111,7 +111,6 @@ const findById = (req, res) => {
   });
 };
 
-//TODO: nota recibiendo el llamado de la ruta en el postman
 const updateById = (req, res) => {
   let id = req.params.id;
   let data = req.body;

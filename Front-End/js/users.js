@@ -1,5 +1,3 @@
-let token = JSON.parse(window.localStorage.getItem("token"));
-
 let formAdd = document.querySelectorAll("#userForm input,select");
 let usersContainer = document.getElementById("usersContainer");
 let saveUser = document.getElementById("saveUser");
@@ -12,7 +10,7 @@ const findUser = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((userList) => {
     userList.json().then((userList) => {
@@ -63,38 +61,42 @@ const addUser = () => {
   signup(dataJSON);
 };
 
-const signup = (Userdata) => {
+const signup = (data) => {
   fetch("http://localhost:4000/api/users/signup", {
     method: "POST",
-    body: Userdata,
+    body: data,
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
-  }).then((user) => {
-    user.json().then((users) => {
-      console.log(users);
-      const { firstName, lastName, email, profile, id } = users;
-      let renderUser = `
-        <div class="user">
-          <input type="checkbox" class="select" />
-          <h3 class="firstName">${firstName}</h3>
-          <h3 class="lastName">${lastName}</h3>
-          <h3 class="email">${email}</h3>
-          <h3 class="profile">${profile}</h3>
-          <i class="fas fa-edit" 
-            onclick="getDataForUpdate(${id})">
-          </i>
-          <i class="far fa-trash-alt"
-            onclick="deleteUser(${id})">
-          </i>
-        </div>
-      `;
-      usersContainer.insertAdjacentHTML("beforeend", renderUser);
-    });
+  }).then((res) => {
+    if (res.status === 400) {
+      notification.innerHTML = "The email already exists";
+      return;
+    } else {
+      res.json().then((users) => {
+        const { firstName, lastName, email, profile, id } = users;
+        let renderUser = `
+          <div class="user">
+            <input type="checkbox" class="select" />
+            <h3 class="firstName">${firstName}</h3>
+            <h3 class="lastName">${lastName}</h3>
+            <h3 class="email">${email}</h3>
+            <h3 class="profile">${profile}</h3>
+            <i class="fas fa-edit" 
+              onclick="getDataForUpdate(${id})">
+            </i>
+            <i class="far fa-trash-alt"
+              onclick="deleteUser(${id})">
+            </i>
+          </div>
+        `;
+        usersContainer.insertAdjacentHTML("beforeend", renderUser);
+      });
+      close();
+      clear();
+    }
   });
-  close();
-  clear();
 };
 
 /* Update users from the page */
@@ -103,7 +105,7 @@ let getDataForUpdate = (id) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((user) => {
     user.json().then((userData) => {
@@ -137,10 +139,6 @@ let getDataForUpdate = (id) => {
 
         let dataJSON = JSON.stringify(data);
         updateUser(id, dataJSON);
-
-        console.log(id);
-        console.log(dataJSON);
-
         close();
         clear();
       });
@@ -154,12 +152,11 @@ let updateUser = (id, data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((updatedUser) => {
-    updatedUser.json().then((userUpd) => {
+    updatedUser.json().then((response) => {
       location.reload();
-      console.log(userUpd);
     });
   });
 };
@@ -172,10 +169,9 @@ const deleteUser = (id) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: "Bearer " + token,
+        Authorization: "Bearer " + token,
       },
-    }).then((user) => {
-      console.log(user);
+    }).then((response) => {
       location.reload();
     });
   });
@@ -199,3 +195,197 @@ let open = () => {
 let openDelete = () => {
   $("#deleteConfirm").modal("show");
 };
+
+/* Sort tags */
+
+function sortByNameA() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("usersContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".user");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[0];
+      y = rows[i + 1].getElementsByTagName("h3")[0];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByNameZ() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("usersContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".user");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[0];
+      y = rows[i + 1].getElementsByTagName("h3")[0];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByLastNameA() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("usersContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".user");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[1];
+      y = rows[i + 1].getElementsByTagName("h3")[1];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByLastNameZ() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("usersContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".user");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[1];
+      y = rows[i + 1].getElementsByTagName("h3")[1];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByEmailA() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("usersContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".user");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[2];
+      y = rows[i + 1].getElementsByTagName("h3")[2];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByEmailZ() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("usersContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".user");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[2];
+      y = rows[i + 1].getElementsByTagName("h3")[2];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByProfileA() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("usersContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".user");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[3];
+      y = rows[i + 1].getElementsByTagName("h3")[3];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortByProfileZ() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("usersContainer");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = document.querySelectorAll(".user");
+
+    for (i = 0; i < rows.length; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("h3")[3];
+      y = rows[i + 1].getElementsByTagName("h3")[3];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}

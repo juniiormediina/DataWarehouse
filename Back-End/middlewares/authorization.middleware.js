@@ -1,5 +1,5 @@
 const authorization = async (req, res, next) => {
-  const { profile } = profile;
+  const { profile } = req.profile;
   if (profile !== "Administrator") {
     res
       .status(401)

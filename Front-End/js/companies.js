@@ -1,5 +1,3 @@
-let token = JSON.parse(window.localStorage.getItem("token"));
-
 const companiesContainer = document.getElementById("CompaniesContainer");
 const formAdd = document.querySelectorAll("#companyForm input,select");
 const notification = document.getElementById("notification");
@@ -33,7 +31,7 @@ const renderCountries = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((countries) => {
     countries.json().then((countries) => {
@@ -53,7 +51,7 @@ const renderCities = (countryId) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((city) => {
     city.json().then((city) => {
@@ -76,7 +74,7 @@ const findCompanies = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   })
     .then((res) => res.json())
@@ -140,7 +138,7 @@ const addCompany = (data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((res) => {
     if (res.status === 400)
@@ -176,7 +174,7 @@ const getDataForUpdateCompany = (id) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((company) => {
     company.json().then((element) => {
@@ -229,7 +227,7 @@ const updateCompany = (id, data) => {
     body: data,
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
   }).then((company) => {
     company.json().then((response) => {
@@ -246,10 +244,9 @@ const deleteCompany = (id) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: "Bearer " + token,
+        Authorization: "Bearer " + token,
       },
-    }).then((company) => {
-      console.log(company);
+    }).then((response) => {
       location.reload();
     });
   });

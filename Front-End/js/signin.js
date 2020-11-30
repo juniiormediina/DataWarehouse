@@ -36,7 +36,6 @@ let signin = () => {
     }),
     {}
   );
-  console.log(signin);
 
   for (const key in signin) {
     if (signin[key] === "") {
@@ -51,7 +50,6 @@ let signin = () => {
   };
 
   const FinalGetInfo = JSON.stringify(getInfo);
-  console.log(FinalGetInfo);
   getData(FinalGetInfo);
 };
 
