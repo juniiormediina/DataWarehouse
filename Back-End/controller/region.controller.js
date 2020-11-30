@@ -31,8 +31,6 @@ const findRegionById = (req, res) => {
 const updateRegionById = (req, res) => {
   let id = req.params.id;
   let data = req.body;
-
-  console.log(data);
   Region.update(data, { where: { id: id } })
     .then((region) => {
       if (region[0] === 1)

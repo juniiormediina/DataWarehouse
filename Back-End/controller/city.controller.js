@@ -43,8 +43,7 @@ const findCountryCity = (CountryId) => {
       .catch(() => {
         rejc({
           status: 500,
-          message:
-            "Tenemos problemas en el servidor, por favor intente mas tarde",
+          message: "Sorry, the server has presented an error. Try again later",
         });
       });
   });
@@ -60,8 +59,6 @@ const findCityById = (req, res) => {
 const updateCityById = (req, res) => {
   let id = req.params.id;
   let data = req.body;
-
-  console.log(data);
   City.update(data, { where: { id: id } })
     .then((city) => {
       if (city[0] === 1)

@@ -49,8 +49,6 @@ const findContactById = (req, res) => {
 const updateContactById = (req, res) => {
   let id = req.params.id;
   let data = req.body;
-
-  console.log(data);
   Contact.update(data, { where: { id: id } })
     .then((contact) => {
       if (contact[0] === 1)
