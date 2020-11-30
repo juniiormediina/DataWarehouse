@@ -319,16 +319,6 @@
   color: white;
 }
 
-.users-content .modal .modal-dialog .modal-content .modal-body .emailExist {
-  color: red;
-  font-size: small;
-}
-
-.users-content .modal .modal-dialog .modal-content .modal-body .passwordMessage {
-  color: red;
-  font-size: small;
-}
-
 .users-content .modal .modal-dialog .modal-content .modal-body .lackFields {
   color: red;
   font-size: small;
@@ -579,16 +569,6 @@
 
 .company-content .modal .modal-dialog .modal-content .modal-header .modal-title {
   color: white;
-}
-
-.company-content .modal .modal-dialog .modal-content .modal-body .emailExist {
-  color: red;
-  font-size: small;
-}
-
-.company-content .modal .modal-dialog .modal-content .modal-body .passwordMessage {
-  color: red;
-  font-size: small;
 }
 
 .company-content .modal .modal-dialog .modal-content .modal-body .lackFields {
@@ -897,22 +877,26 @@
   color: white;
 }
 
-.contact-content .modal .modal-dialog .modal-content .modal-body .emailExist {
-  color: red;
-  font-size: small;
-}
-
-.contact-content .modal .modal-dialog .modal-content .modal-body .passwordMessage {
-  color: red;
-  font-size: small;
-}
-
 .contact-content .modal .modal-dialog .modal-content .modal-body .lackFields {
   color: red;
   font-size: small;
 }
 
-.contact-content .modal .modal-dialog .modal-content .modal-body .percent {
+.contact-content .modal .modal-dialog .modal-content .modal-body .interest {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+}
+
+.contact-content .modal .modal-dialog .modal-content .modal-body .interest select {
+  width: 100px;
+}
+
+.contact-content .modal .modal-dialog .modal-content .modal-body .interest .percent {
   margin-top: -40px;
   margin-left: 115px;
 }
@@ -1209,16 +1193,6 @@
 
 .region-city-content .modal .modal-dialog .modal-content .modal-header .modal-title {
   color: white;
-}
-
-.region-city-content .modal .modal-dialog .modal-content .modal-body .emailExist {
-  color: red;
-  font-size: small;
-}
-
-.region-city-content .modal .modal-dialog .modal-content .modal-body .passwordMessage {
-  color: red;
-  font-size: small;
 }
 
 .region-city-content .modal .modal-dialog .modal-content .modal-body .lackFields {
